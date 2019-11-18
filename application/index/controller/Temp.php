@@ -107,29 +107,45 @@ class Temp extends Controller
     public function read_state(){
         $data_state = file_get_contents('C:\Users\mikeh\Saved Games\DCS\Scripts\RSR\rsrState.json');
         //        $data_state = file_get_contents('C:\Users\Ash\Saved Games\DCS.DS_openbeta\Scripts\RSR\rsrState.json');
-        dump($data_state);
+        //dump($data_state);
         $data_state_decode = json_decode($data_state,1);
-        dump($data_state_decode);
+        //dump($data_state_decode);
         return $data_state_decode;
     }
 
     public function read_state_blue_airbase(){
         $data  = $this -> read_state();
-        dump($data['baseOwnership']['airbases']['blue']);
+        //dump($data['baseOwnership']['airbases']['blue']);
+        $data = $data['baseOwnership']['airbases']['blue'];
+        return $data;
     }
     public function read_state_red_airbase(){
         $data  = $this -> read_state();
-        dump($data['baseOwnership']['airbases']['red']);
+        //dump($data['baseOwnership']['airbases']['red']);
+        $data = $data['baseOwnership']['airbases']['red'];
+
+        return $data;
+
     }
 
     public function update_state(){
         $db_live_map = PgLivemap::all() ;
-        dump($db_live_map);
+        //dump($db_live_map);
 
         $blue_current_airbase = $this->read_state_blue_airbase();
         $red_current_airbase = $this->read_state_red_airbase();
 
-        
+        dump($blue_current_airbase);
+
+
+        //compare and update blue team airbase captures info
+        foreach ($blue_current_airbase as $key => $value){
+
+            $db_temp = PgLivemap::where('name', $value)->find();
+            dump($value);
+            dump($db_temp);
+
+        }
 
     }
 }
