@@ -2,6 +2,7 @@
 
 namespace app\index\controller;
 
+use app\index\model\CaucasusLivemap;
 use think\Controller;
 use think\Session;
 use View;
@@ -129,23 +130,46 @@ class Temp extends Controller
     }
 
     public function update_state(){
-        $db_live_map = PgLivemap::all() ;
+        $db_live_map = CaucasusLivemap::all() ;
         //dump($db_live_map);
 
         $blue_current_airbase = $this->read_state_blue_airbase();
         $red_current_airbase = $this->read_state_red_airbase();
 
-        dump($blue_current_airbase);
+        dump($red_current_airbase);
 
 
         //compare and update blue team airbase captures info
         foreach ($blue_current_airbase as $key => $value){
 
-            $db_temp = PgLivemap::where('name', $value)->find();
+            $db_temp = CaucasusLivemap::where('name', $value)->find();
             dump($value);
             dump($db_temp);
 
+
+            if ($db_temp['side'] != 'blue'){
+                $db_temp->side = 'blue';
+                $db_temp->capcture_unix_time = time();
+                $db_temp->save();
+            }
+
         }
+
+        foreach ($red_current_airbase as $key => $value){
+
+            $db_temp = CaucasusLivemap::where('name', $value)->find();
+            dump($value);
+            dump($db_temp);
+
+
+            if ($db_temp['side'] != 'red'){
+                $db_temp->side = 'red';
+                $db_temp->capcture_unix_time = time();
+                $db_temp->save();
+            }
+
+        }
+
 
     }
 }
