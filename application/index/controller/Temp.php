@@ -129,7 +129,7 @@ class Temp extends Controller
         $blue_current_airbase = $this->read_state_blue_airbase();
         $red_current_airbase = $this->read_state_red_airbase();
 
-
+        
 
     }
 }
