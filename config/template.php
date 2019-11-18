@@ -32,4 +32,11 @@ return [
     'taglib_begin' => '{',
     // 标签库标签结束标记
     'taglib_end'   => '}',
+
+    // 模板输出替换
+    'tpl_replace_string'  =>  [
+        '__Zircos__'   => '/template',
+        '__Inspinia__'   => '/03082018_01_T',
+        '__Jquery_Mobile__'   => '/20092019_01_T',
+    ]
 ];

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+{// Html页头，包含title、meta信息等还有js、css文件加载 }
+{block name="head"}head{/block}
+<body>
+<div id="wrapper">
+    {// 模板左侧菜单栏 }
+    {include file="../application/index/view/Inspinia_Basic/left_side_bar.html" /}
+
+    <div id="page-wrapper" class="gray-bg">
+        {// 模板页面的顶部导航栏，包括搜索 }
+        {include file="../application/index/view/Inspinia_Basic/topnav.html" /}
+
+        {// 模板继承content区块 }
+        {block name="content"}content{/block}
+
+        {// 模板页面页脚 }
+        {include file="../application/index/view/Inspinia_Basic/footer.html" /}
+
+
+
+    </div>
+
+    {// 模板中隐藏的右菜单栏，由topnav里面的按钮控制 }
+    {include file="../application/index/view/Inspinia_Basic/right_side_bar.html" /}
+
+</div>
+
+{// Html页尾的js文件加载 }
+
+{block name="end"}end{/block}
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+{extend name="/Jquery_Mobile/base" /}
+
+{block name="content"}
+
+
+{php}//dump($site_info)
+{/php}
+<div data-role="page" id="pageone" data-theme="b">
+    <div data-role="content">
+
+        <div>Please ensure your comm 1 or comm 2 is connect to main GCI 251.00AM</div>
+
+
+        <h3 class="ui-bar ui-bar-a ui-corner-all">Briefing to player name</h3>
+
+        Tech Commander: phoenix11
+              
+        <div class="ui-body ui-body-a ui-corner-all">
+            <p>We r mainly attackin the kish Int,capcturing the Bandar L
+                <br>
+                we also need some CAP at bandar abbs and defend FRAP at north east
+            </p>       
+        </div>
+
+        <p style="color: white">Currently 4 GCI online!</p>
+        <form>
+            <ul data-role="listview" data-inset="true">
+                    
+                <li data-role="list-divider">TangDalan_MOB #CR03 <span class="ui-li-count">2</span></li>
+                <li><a href="index.html">
+                        <h2>Mission type: SEAD</h2>
+                        <p><strong>You've been invited to a SEAD mission at CR03 MOB</strong></p>
+                        <p>N27°23.138 E55°00.673<br><strong>Freq 265 AM(2 in comm)</strong><br>2 joined, 1 required</p>
+                    <p>Issued by: player1</p>
+                            <p class="ui-li-aside" style="color: red"><strong>First prority</strong></p>
+                        </a></li>
+                <li><a href="index.html">
+                        <h2>A2G: Destory command center</h2>
+                        <p>N27°23.138 E55°00.673<br><strong>Freq 265 AM</strong><br>2 joined, 1 required</p>
+                    <p>Issued by: player1</p>
+                </a></li>
+                <li data-role="list-divider">#DR53<span class="ui-li-count"></span></li>
+                <li><a href="index.html">
+                        <h2>A2G Destory the T-80</h2>
+                        <p>Near N27°13.168 E53°02.613<br><strong>Laser code 1687</strong><br>Unengaged</p>
+                    <p>Issued by GCI: player2</p>
+                        </a></li>
+            </ul>
+        </form>
+
+    </div>
+</div>
+
+{/block}
