@@ -124,7 +124,6 @@ class Temp extends Controller
         $data  = $this -> read_state();
         //dump($data['baseOwnership']['airbases']['red']);
         $data = $data['baseOwnership']['airbases']['red'];
-
         return $data;
 
     }
@@ -172,4 +171,245 @@ class Temp extends Controller
 
 
     }
+
+    public function blue_temp(){
+        $blue_current_airbase = $this->read_state_blue_airbase();
+
+
+        foreach ($blue_current_airbase as $key => $value){
+
+            $db_temp = CaucasusLivemap::where('name', $value)->find();
+            //dump($value);
+            //dump($db_temp);
+            $data[$key]['type'] = 'Feature';
+            $data_properties['cap'] = $db_temp['display_name'];
+            $data_properties['uncap'] = 'small text';
+
+            $data[$key]['properties'] = $data_properties;
+
+            $data_geometry['type'] = "Point";
+            $data_coordinates = array($db_temp['x'],$db_temp['y']);
+            $data_geometry['coordinates'] = $data_coordinates;
+
+            $data[$key]['geometry'] = $data_geometry;
+
+
+            unset($data_properties, $data_geometry,$data_coordinates);
+        }
+        //dump(json_encode($data));
+
+
+        return $data;
+
+    }
+
+    public function red_temp(){
+        $blue_current_airbase = $this->read_state_red_airbase();
+
+
+        foreach ($blue_current_airbase as $key => $value){
+
+            $db_temp = CaucasusLivemap::where('name', $value)->find();
+            //dump($value);
+            //dump($db_temp);
+            $data[$key]['type'] = 'Feature';
+            $data_properties['cap'] = $db_temp['display_name'];
+            $data_properties['uncap'] = 'small text';
+
+            $data[$key]['properties'] = $data_properties;
+
+            $data_geometry['type'] = "Point";
+            $data_coordinates = array($db_temp['x'],$db_temp['y']);
+            $data_geometry['coordinates'] = $data_coordinates;
+
+            $data[$key]['geometry'] = $data_geometry;
+
+
+            unset($data_properties, $data_geometry,$data_coordinates);
+        }
+        //dump(json_encode($data));
+
+
+        return $data;
+
+    }
+
+    public function map_json_blue_airbase(){
+        $json =  '{
+            "id":"blue",
+            "type":"symbol",
+            "source":{
+                "type":"geojson",
+                "data":{
+                    "type":"FeatureCollection",
+                    "features":[
+                        {
+                            "type":"Feature",
+                            "properties":{
+                                "cap":"Sochi",
+                                "uncap":"small text"
+                            },
+                            "geometry":{
+                                "type":"Point",
+                                "coordinates":[
+                                    39.729996,
+                                    43.58835
+                                ]
+                            }
+                        },
+                        {
+                            "type":"Feature",
+                            "properties":{
+                                "cap":"Krasnodar",
+                                "uncap":"small text"
+                            },
+                            "geometry":{
+                                "type":"Point",
+                                "coordinates":[
+                                    38.97626,
+                                    45.057762
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            "layout":{
+                "icon-image": "pulsing-dot1",
+                "text-field":[
+                    "format",
+                    [
+                        "upcase",
+                        [
+                            "get",
+                            "cap"
+                        ]
+                    ],
+                    {
+                        "font-scale":0.8
+                    },
+                    "\n",
+                    {
+
+                    },
+                    [
+                        "downcase",
+                        [
+                            "get",
+                            "uncap"
+                        ]
+                    ],
+                    {
+                        "font-scale":0.6
+                    }
+                ],
+                "text-font":[
+                    "Open Sans Semibold",
+                    "Arial Unicode MS Bold"
+                ],
+                "text-offset":[
+                    0,
+                    0.6
+                ],
+                "text-anchor":"top"
+            }
+        }';
+
+        //make json data for key:features
+        $json_decode = json_decode($json, 1);
+        $json_decode['source']['data']['features'] = $this->blue_temp();
+
+        return json_encode($json_decode);
+    }
+
+    public function map_json_red_airbase(){
+        $json =  '{
+            "id":"red",
+            "type":"symbol",
+            "source":{
+                "type":"geojson",
+                "data":{
+                    "type":"FeatureCollection",
+                    "features":[
+                        {
+                            "type":"Feature",
+                            "properties":{
+                                "cap":"Sochi",
+                                "uncap":"small text"
+                            },
+                            "geometry":{
+                                "type":"Point",
+                                "coordinates":[
+                                    39.729996,
+                                    43.58835
+                                ]
+                            }
+                        },
+                        {
+                            "type":"Feature",
+                            "properties":{
+                                "cap":"Krasnodar",
+                                "uncap":"small text"
+                            },
+                            "geometry":{
+                                "type":"Point",
+                                "coordinates":[
+                                    38.97626,
+                                    45.057762
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            "layout":{
+                "icon-image":"pulsing-dot",
+                "text-field":[
+                    "format",
+                    [
+                        "upcase",
+                        [
+                            "get",
+                            "cap"
+                        ]
+                    ],
+                    {
+                        "font-scale":0.8
+                    },
+                    "\n",
+                    {
+
+                    },
+                    [
+                        "downcase",
+                        [
+                            "get",
+                            "uncap"
+                        ]
+                    ],
+                    {
+                        "font-scale":0.6
+                    }
+                ],
+                "text-font":[
+                    "Open Sans Semibold",
+                    "Arial Unicode MS Bold"
+                ],
+                "text-offset":[
+                    0,
+                    0.6
+                ],
+                "text-anchor":"top"
+            }
+        }';
+
+        //make json data for key:features
+        $json_decode = json_decode($json, 1);
+        $json_decode['source']['data']['features'] = $this->red_temp();
+
+        return json_encode($json_decode);
+    }
+
+
+
 }
