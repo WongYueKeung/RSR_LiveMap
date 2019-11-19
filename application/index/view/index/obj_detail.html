@@ -1,0 +1,68 @@
+{extend name="/Jquery_Mobile/base" /}
+
+{block name="content"}
+
+
+{php}//dump($site_info)
+{/php}
+<div data-role="page" id="pageone" data-theme="b">
+    <div data-role="content">
+
+        <h3 class="ui-bar ui-bar-a ui-corner-all">Destory the T-80</h3>
+              <div class="ui-body ui-body-a ui-corner-all">
+        <p>Near N27°13.168 E53°02.613<br><strong>Laser code 1687, Lasing</strong><br>Unengaged<br>Freq 265 AM</p>
+
+        <p>Current vector:<br>253 For 23nm</p>
+        <p>Issued by GCI: player2</p>
+              </div>
+        <div class="ui-input-btn ui-btn ui-icon-delete ui-btn-icon-right">
+                    Save the coordinate as WP
+                    <input type="button" data-enhanced="true" value="Enhanced - Right">
+                </div>
+
+        <div data-role="controlgroup"  data-mini="true">
+                <a href="#" class="ui-btn ui-corner-all">GO</a>
+                <a href="#" class="ui-btn ui-corner-all">NO GO</a>
+        </div>
+            <h3>Nearly friendly</h3>
+        <div data-role="collapsible" data-inset="false">
+                <h3>033 For 6nm at265AM Role:CAP Cold</h3>
+                <ul data-role="listview">
+                    <li><a href="#">Canary</a></li>
+                    <li><a href="#">Cat</a></li>
+                    <li><a href="#">Dog</a></li>
+                    <li><a href="#">Gerbil</a></li>
+                    <li><a href="#">Iguana</a></li>
+                    <li><a href="#">Mouse</a></li>
+                </ul>
+        </div><!-- /collapsible -->
+        <div data-role="collapsible" data-inset="false">
+                <h3>200 For 4.5nm at265AM Role:A2G Hot</h3>
+                <ul data-role="listview">
+                    <li>Loadout: 4*AGM65F 2*Aim 120C</li>
+            <li>Angle 6</li>
+                </ul>
+        </div><!-- /collapsible -->
+        <div data-role="collapsible" data-inset="false">
+                <h3>120 For 120nm at270AM Role:CAP Hot</h3>
+                <ul data-role="listview">
+                    <li><a href="#">Aardvark</a></li>
+                    <li><a href="#">Alligator</a></li>
+                    <li><a href="#">Ant</a></li>
+                    <li><a href="#">Bear</a></li>
+                    <li><a href="#">Beaver</a></li>
+                    <li><a href="#">Cougar</a></li>
+                    <li><a href="#">Dingo</a></li>
+                </ul>
+        </div><!-- /collapsible -->
+
+
+
+        <div class="ui-input-btn ui-btn ui-icon-back ui-btn-icon-right">
+                    Return<input type="button" data-enhanced="true" value="">
+                </div>
+
+    </div>
+</div>
+
+{/block}
