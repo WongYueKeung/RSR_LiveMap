@@ -15,7 +15,6 @@ use app\index\model\PgLivemap;
 use think\helper\Time;
 
 
-
 class Index extends Controller
 {
     public function index()
@@ -125,7 +124,9 @@ class Index extends Controller
             //dump($db_temp);
             $data[$key]['type'] = 'Feature';
             $data_properties['cap'] = $db_temp['display_name'];
-            $data_properties['uncap'] = 'small text';
+
+
+            $data_properties['uncap'] = 'captured ' . format_date($db_temp['capcture_unix_time']);
 
             $data[$key]['properties'] = $data_properties;
 
@@ -156,7 +157,7 @@ class Index extends Controller
             //dump($db_temp);
             $data[$key]['type'] = 'Feature';
             $data_properties['cap'] = $db_temp['display_name'];
-            $data_properties['uncap'] = 'small text';
+            $data_properties['uncap'] = 'captured ' . format_date($db_temp['capcture_unix_time']);
 
             $data[$key]['properties'] = $data_properties;
 
