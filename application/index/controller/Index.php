@@ -48,8 +48,8 @@ class Index extends Controller
     }
 
     public function read_state(){
-        $data_state = file_get_contents('C:\Users\mikeh\Saved Games\DCS\Scripts\RSR\rsrState.json');
-        //        $data_state = file_get_contents('C:\Users\Ash\Saved Games\DCS.DS_openbeta\Scripts\RSR\rsrState.json');
+        //$data_state = file_get_contents('C:\Users\mikeh\Saved Games\DCS\Scripts\RSR\rsrState.json');
+                $data_state = file_get_contents('C:\Users\Ash\Saved Games\DCS.DS_openbeta\Scripts\RSR\rsrState.json');
         //dump($data_state);
         $data_state_decode = json_decode($data_state,1);
         //dump($data_state_decode);
