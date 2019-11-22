@@ -84,13 +84,15 @@ class Index extends Controller
 
             $db_temp = CaucasusLivemap::where('name', $value)->find();
             //dump($value);
+            //echo $key;
             //dump($db_temp);
 
 
-            if ($db_temp['side'] != 'blue'){
+            if ($db_temp['side'] != 'blue' && !is_null($db_temp)){
                 $db_temp->side = 'blue';
                 $db_temp->capcture_unix_time = time();
                 $db_temp->save();
+
             }
 
         }
@@ -99,10 +101,11 @@ class Index extends Controller
 
             $db_temp = CaucasusLivemap::where('name', $value)->find();
             //dump($value);
+            //echo $key;
             //dump($db_temp);
 
 
-            if ($db_temp['side'] != 'red'){
+            if ($db_temp['side'] != 'red' && !is_null($db_temp)){
                 $db_temp->side = 'red';
                 $db_temp->capcture_unix_time = time();
                 $db_temp->save();
@@ -220,6 +223,8 @@ class Index extends Controller
             },
             "layout":{
                 "icon-image": "pulsing-dot1",
+                "icon-allow-overlap": true,
+                "icon-ignore-placement": true,
                 "text-field":[
                     "format",
                     [
@@ -313,6 +318,8 @@ class Index extends Controller
             },
             "layout":{
                 "icon-image":"pulsing-dot",
+                "icon-allow-overlap": true,
+                "icon-ignore-placement": true,
                 "text-field":[
                     "format",
                     [

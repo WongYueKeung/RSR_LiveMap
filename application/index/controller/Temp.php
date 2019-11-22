@@ -411,5 +411,8 @@ class Temp extends Controller
     }
 
 
+    public function temp1(){
+        dump(json_encode(CaucasusLivemap::all()));
+    }
 
 }

@@ -30,11 +30,22 @@
 <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiZW5naW5lMDc1NSIsImEiOiJjazMyY2NiNnkwaWpjM21wbXplcmk5azh5In0.XoHRgaAQgpCbLaqcBru51g';
 
+    var bounds = [
+        [35.580307, 39.103504], // Southwest coordinates
+        [48.030353, 46.359388]  // Northeast coordinates
+    ];
+
+
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v9',
-        center: [42.392174,42.563044],
-        zoom: 7.15
+        //style: 'mapbox://styles/mapbox/streets-v9',
+        style: 'mapbox://styles/mapbox/dark-v10',
+
+        center: [40.392174,43.503044],
+        zoom: 6.8,
+
+        maxBounds: bounds, // Sets bounds as max
+
 
     });
 
@@ -60,8 +71,8 @@
             var duration = 1000;
             var t = (performance.now() % duration) / duration;
 
-            var radius = size / 2 * 0.3;
-            var outerRadius = size / 2 * 0.7 * t + radius;
+            var radius = size / 4 * 0.3;
+            var outerRadius = size / 4 * 0.7 * t + radius;
             var context = this.context;
 
             // draw outer circle
@@ -109,8 +120,8 @@
             var duration = 1000;
             var t = (performance.now() % duration) / duration;
 
-            var radius = size / 2 * 0.3;
-            var outerRadius = size / 2 * 0.7 * t + radius;
+            var radius = size / 4 * 0.3;
+            var outerRadius = size / 4 * 0.7 * t + radius;
             var context = this.context;
 
             // draw outer circle
@@ -154,6 +165,9 @@
 
     // disable map zoom when using scroll
     //map.scrollZoom.disable();
+            map.setMinZoom(6.8);
+
+
 </script>
 
 </body>
