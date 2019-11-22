@@ -1,0 +1,19 @@
+{
+  "baseOwnership": {
+    "airbases": {
+      "blue": [ "Sukhumi-Babushara", "Vaziani", "Batumi", "Kobuleti" ],
+      "neutral": [ "Krasnodar-Pashkovsky", "Soganlug", "Tbilisi-Lochini" ],
+      "red": [ "Gudauta", "Mozdok", "Gelendzhik", "Novorossiysk", "Krymsk", "Maykop-Khanskaya", "Nalchik", "Krasnodar-Center", "Sochi-Adler", "Kutaisi", "Senaki-Kolkhi", "Beslan", "Mineralnye Vody", "Anapa-Vityazevo" ]
+    },
+    "farps": {
+      "blue": [ "LM56", "GH21", "LN21", "MM25", "LN90", "KN76" ],
+      "neutral": [],
+      "red": [ "EJ35", "EJ98", "MN61", "DK70", "GJ38", "LP31", "GJ22", "FJ69", "MP24", "EK14", "FJ53", "MN34" ]
+    }
+  },
+  "ctld": {
+    "nextGroupId": 1,
+    "nextUnitId": 17
+  },
+  "persistentGroupData": []
+}
