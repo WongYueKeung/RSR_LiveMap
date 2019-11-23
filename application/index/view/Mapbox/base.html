@@ -34,6 +34,14 @@
         style: 'mapbox://styles/mapbox/streets-v9',
         center: [42.392174,42.563044],
         zoom: 7.15
+        //style: 'mapbox://styles/mapbox/streets-v9',
+        style: 'mapbox://styles/mapbox/dark-v10',
+
+        center: [40.392174,43.503044],
+        zoom: 6.8,
+
+        //maxBounds: bounds, // Sets bounds as max
+
 
     });
 
@@ -148,11 +156,42 @@
         map.addLayer({php} echo $json_red {/php});
         map.addLayer({php} echo $json_blue{/php});
 
+                    map.loadImage('http://rsr-map.com/frap-blue.png', function(error, image) {
+                        if (error) throw error;
+                        map.addImage('cat', image);
+                        map.addLayer({
+                            "id": "points",
+                            "type": "symbol",
+                            "source": {
+                                "type": "geojson",
+                                "data": {
+                                    "type": "FeatureCollection",
+                                    "features": [{
+                                        "type": "Feature",
+                                        "geometry": {
+                                            "type": "Point",
+                                            "coordinates": [0, 0]
+                                        }
+                                    }]
+                                }
+                            },
+                            "layout": {
+                                "icon-image": "cat",
+                                "icon-size": 0.25
+                            }
+                        });
+                    });
+
+
+
 
     });
 
     // disable map zoom when using scroll
     //map.scrollZoom.disable();
+            //map.setMinZoom(7.0);
+
+
 </script>
 
 </body>

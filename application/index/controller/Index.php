@@ -14,6 +14,7 @@ use app\index\model\PgLivemap;
 //助手时间Time函数，位于手册的杂项->Time
 use think\helper\Time;
 
+use app\index\controller\Farp;
 
 
 class Index extends Controller
@@ -56,26 +57,26 @@ class Index extends Controller
         return $data_state_decode;
     }
 
-    public function read_state_blue_airbase(){
-        $data  = $this -> read_state();
+    public function read_state_blue_airbase($data){
+        //$data  = $this -> read_state();
         //dump($data['baseOwnership']['airbases']['blue']);
         $data = $data['baseOwnership']['airbases']['blue'];
         return $data;
     }
-    public function read_state_red_airbase(){
-        $data  = $this -> read_state();
+    public function read_state_red_airbase($data){
+        //$data  = $this -> read_state();
         //dump($data['baseOwnership']['airbases']['red']);
         $data = $data['baseOwnership']['airbases']['red'];
         return $data;
 
     }
 
-    public function update_state(){
+    public function update_state($data_RSRState){
         $db_live_map = CaucasusLivemap::all() ;
         //dump($db_live_map);
 
-        $blue_current_airbase = $this->read_state_blue_airbase();
-        $red_current_airbase = $this->read_state_red_airbase();
+        $blue_current_airbase = $this->read_state_blue_airbase($data_RSRState);
+        $red_current_airbase = $this->read_state_red_airbase($data_RSRState);
 
         dump($red_current_airbase);
 
@@ -357,6 +358,42 @@ class Index extends Controller
         return $result;
     }
 
+
+    public function map_json_blue_frap(){
+        $this->update_state();
+        $json =  '{
+                            "id": "points",
+                            "type": "symbol",
+                            "source": {
+                                "type": "geojson",
+                                "data": {
+                                    "type": "FeatureCollection",
+                                    "features": [{
+                                        "type": "Feature",
+                                        "geometry": {
+                                            "type": "Point",
+                                            "coordinates": [0, 0]
+                                        }
+                                    }]
+                                }
+                            },
+                            "layout": {
+                                "icon-image": "cat",
+                                "icon-size": 0.25
+                            }
+                        }';
+
+        //make json data for key:features
+        $json_decode = json_decode($json, 1);
+        //$json_decode['source']['data']['features'] = $this->blue_temp();
+
+        $farp = new Farp();
+        $farp->index();
+
+        //temp fix json decode issue
+        $result = str_replace('[]' , '{}',json_encode($json_decode));
+        return $result;
+    }
 
 
 }
