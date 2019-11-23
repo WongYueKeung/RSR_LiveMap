@@ -44,7 +44,7 @@
         center: [40.392174,43.503044],
         zoom: 6.8,
 
-        maxBounds: bounds, // Sets bounds as max
+        //maxBounds: bounds, // Sets bounds as max
 
 
     });
@@ -165,8 +165,34 @@
 
             // disable map zoom when using scroll
             //map.scrollZoom.disable();
-            map.setMinZoom(7.0);
+            //map.setMinZoom(7.0);
 
+
+            map.loadImage('http://rsr-map.com/farp-blue.png', function(error, image) {
+                if (error) throw error;
+                map.addImage('farp-blue', image);
+                map.addLayer({
+                    "id": "points",
+                    "type": "symbol",
+                    "source": {
+                        "type": "geojson",
+                        "data": {
+                            "type": "FeatureCollection",
+                            "features": [{
+                                "type": "Feature",
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [0, 0]
+                                }
+                            }]
+                        }
+                    },
+                    "layout": {
+                        "icon-image": "farp-blue",
+                        "icon-size": 0.15
+                    }
+                });
+            });
 
 </script>
 
