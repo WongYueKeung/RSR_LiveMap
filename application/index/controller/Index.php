@@ -15,6 +15,7 @@ use app\index\model\PgLivemap;
 use think\helper\Time;
 
 use app\index\controller\Farp;
+use app\index\controller\Airbase;
 
 
 class Index extends Controller
@@ -44,15 +45,15 @@ class Index extends Controller
         $data_blue_airbase = $this->read_state_blue_airbase($data_RSRState);
         $data_red_airbase = $this->read_state_red_airbase($data_RSRState);
 
-        $json_red = $this->red_json_generator_airbase($data_red_airbase);
-        $json_blue= $this->blue_json_generator_airbase($data_blue_airbase);
+        $json_red_airbase = $this->red_json_generator_airbase($data_red_airbase);
+        $json_blue_airbase= $this->blue_json_generator_airbase($data_blue_airbase);
 
 
         //dump($json_red);
         //halt($json_blue);
 
-        $this->assign('json_red', $json_red);
-        $this->assign('json_blue', $json_blue);
+        $this->assign('json_red', $json_red_airbase);
+        $this->assign('json_blue', $json_blue_airbase);
 
 
         return $this->fetch('');
