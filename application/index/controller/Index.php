@@ -42,11 +42,11 @@ class Index extends Controller
         //Update db once from RSRState.json b4 showin the map
         $this->update_state($data_RSRState);
         //read the RSRState.json file content and spilt them, covert into PHP array(reuse the RSRState.json content from updating DB)
-        $data_blue_airbase = $this->read_state_blue_airbase($data_RSRState);
-        $data_red_airbase = $this->read_state_red_airbase($data_RSRState);
+        $data_blue_airbase = Airbase::read_state_blue_airbase($data_RSRState);
+        $data_red_airbase = Airbase::read_state_red_airbase($data_RSRState);
 
-        $json_red_airbase = $this->red_json_generator_airbase($data_red_airbase);
-        $json_blue_airbase= $this->blue_json_generator_airbase($data_blue_airbase);
+        $json_red_airbase = Airbase::red_json_generator_airbase($data_red_airbase);
+        $json_blue_airbase= Airbase::blue_json_generator_airbase($data_blue_airbase);
 
 
         //dump($json_red);
@@ -75,8 +75,8 @@ class Index extends Controller
         $db_live_map = CaucasusLivemap::all() ;
         //dump($db_live_map);
 
-        $blue_current_airbase = $this->read_state_blue_airbase($data_RSRState);
-        $red_current_airbase = $this->read_state_red_airbase($data_RSRState);
+        $blue_current_airbase = Airbase::read_state_blue_airbase($data_RSRState);
+        $red_current_airbase = Airbase::read_state_red_airbase($data_RSRState);
 
         //dump($red_current_airbase);
 
