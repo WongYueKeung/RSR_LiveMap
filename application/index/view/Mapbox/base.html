@@ -5,6 +5,7 @@
     <title>RSR - Live Map</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.js'></script>
+    <link rel="icon" href="//img1.wsimg.com/isteam/ip/d837f339-0c70-45ad-8c5c-4614e8fe41cf/favicon/a71a660b-037f-45e6-b5bc-8bbbb4f12562.png/:/rs=w:64,h:64,m" sizes="64x64"/>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.5.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
@@ -15,30 +16,35 @@
 
 <div id='map'></div>
 <script>
-//    function dev_in_progress() {
-//        var ask = window.confirm("Developer is currently workin on this, want to take a look?");
-//        if (ask) {
-//
-//            window.location.href = "https://www.twitch.tv/mike_for_sale/";
-//
-//        }
-//    }
-//    dev_in_progress();
+    //    function dev_in_progress() {
+    //        var ask = window.confirm("Developer is currently workin on this, want to take a look?");
+    //        if (ask) {
+    //
+    //            window.location.href = "https://www.twitch.tv/mike_for_sale/";
+    //
+    //        }
+    //    }
+    //    dev_in_progress();
 </script>
 
 <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiZW5naW5lMDc1NSIsImEiOiJjazMyY2NiNnkwaWpjM21wbXplcmk5azh5In0.XoHRgaAQgpCbLaqcBru51g';
 
+    var bounds = [
+        [35.580307, 39.103504], // Southwest coordinates
+        [48.030353, 46.359388]  // Northeast coordinates
+    ];
+
+
     var map = new mapboxgl.Map({
         container: 'map',
-
         //style: 'mapbox://styles/mapbox/streets-v9',
         style: 'mapbox://styles/mapbox/dark-v10',
 
         center: [40.392174,43.503044],
         zoom: 6.8,
 
-        //maxBounds: bounds, // Sets bounds as max
+        maxBounds: bounds, // Sets bounds as max
 
 
     });
@@ -65,8 +71,8 @@
             var duration = 1000;
             var t = (performance.now() % duration) / duration;
 
-            var radius = size / 2 * 0.3;
-            var outerRadius = size / 2 * 0.7 * t + radius;
+            var radius = size / 4 * 0.3;
+            var outerRadius = size / 4 * 0.7 * t + radius;
             var context = this.context;
 
             // draw outer circle
@@ -114,8 +120,8 @@
             var duration = 1000;
             var t = (performance.now() % duration) / duration;
 
-            var radius = size / 2 * 0.3;
-            var outerRadius = size / 2 * 0.7 * t + radius;
+            var radius = size / 4 * 0.3;
+            var outerRadius = size / 4 * 0.7 * t + radius;
             var context = this.context;
 
             // draw outer circle
@@ -152,47 +158,16 @@
         map.addImage('pulsing-dot1', pulsingDot1, { pixelRatio: 2 });
 
         map.addLayer({php} echo $json_red {/php});
-        map.addLayer({php} echo $json_blue{/php});
-
-                    map.loadImage('http://rsr-map.com/frap-blue.png', function(error, image) {
-                        if (error) throw error;
-                        map.addImage('cat', image);
-                        map.addLayer({
-                            "id": "points",
-                            "type": "symbol",
-                            "source": {
-                                "type": "geojson",
-                                "data": {
-                                    "type": "FeatureCollection",
-                                    "features": [{
-                                        "type": "Feature",
-                                        "geometry": {
-                                            "type": "Point",
-                                            "coordinates": [0, 0]
-                                        }
-                                    }]
-                                }
-                            },
-                            "layout": {
-                                "icon-image": "cat",
-                                "icon-size": 0.25
-                            }
-                        });
-                    });
+            map.addLayer({php} echo $json_blue{/php});
 
 
+            });
+
+            // disable map zoom when using scroll
+            //map.scrollZoom.disable();
+            map.setMinZoom(7.0);
 
 
-    });
-
-    // disable map zoom when using scroll
-    //map.scrollZoom.disable();
-<<<<<<< Updated upstream
-=======
-            //map.setMinZoom(7.0);
-
-
->>>>>>> Stashed changes
 </script>
 
 </body>

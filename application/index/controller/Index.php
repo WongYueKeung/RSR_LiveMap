@@ -40,8 +40,16 @@ class Index extends Controller
 
         //Update db once from RSRState.json b4 showin the map
         $this->update_state($data_RSRState);
-        $json_red = $this->red_json_generator_airbase($data_RSRState);
-        $json_blue= $this->blue_json_generator_airbase($data_RSRState);
+        //read the RSRState.json file content and spilt them, covert into PHP array(reuse the RSRState.json content from updating DB)
+        $data_blue_airbase = $this->read_state_blue_airbase($data_RSRState);
+        $data_red_airbase = $this->read_state_red_airbase($data_RSRState);
+
+        $json_red = $this->red_json_generator_airbase($data_red_airbase);
+        $json_blue= $this->blue_json_generator_airbase($data_blue_airbase);
+
+
+        //dump($json_red);
+        //halt($json_blue);
 
         $this->assign('json_red', $json_red);
         $this->assign('json_blue', $json_blue);
@@ -82,15 +90,15 @@ class Index extends Controller
         $blue_current_airbase = $this->read_state_blue_airbase($data_RSRState);
         $red_current_airbase = $this->read_state_red_airbase($data_RSRState);
 
-        dump($red_current_airbase);
+        //dump($red_current_airbase);
 
 
         //compare and update blue team airbase captures info
         foreach ($blue_current_airbase as $key => $value){
 
             $db_temp = CaucasusLivemap::where('name', $value)->find();
-            dump($value);
-            dump($db_temp);
+            //dump($value);
+            //dump($db_temp);
 
 
             if ($db_temp['side'] != 'blue'){
@@ -104,8 +112,8 @@ class Index extends Controller
         foreach ($red_current_airbase as $key => $value){
 
             $db_temp = CaucasusLivemap::where('name', $value)->find();
-            dump($value);
-            dump($db_temp);
+            //dump($value);
+            //dump($db_temp);
 
 
             if ($db_temp['side'] != 'red'){
@@ -257,7 +265,6 @@ class Index extends Controller
     public function red_json_generator_airbase($red_current_airbase){
         //$blue_current_airbase = $this->read_state_red_airbase();
 
-
         foreach ($red_current_airbase as $key => $value){
 
             $db_temp = CaucasusLivemap::where('name', $value)->find();
@@ -365,7 +372,7 @@ class Index extends Controller
 
         //make json data for key:features
         $json_decode = json_decode($json, 1);
-        $json_decode['source']['data']['features'] = $this->red_temp();
+        $json_decode['source']['data']['features'] = $data;
 
         $result = str_replace('[]' , '{}',json_encode($json_decode));
 
