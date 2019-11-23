@@ -36,8 +36,9 @@ class Index extends Controller
             'title' => 'ThinkPHP',
             'list' => array('id' => 'content1', 'key2' => 'content2')
         ]);
-        $json_red = $this->map_json_red_airbase();
-        $json_blue= $this->map_json_blue_airbase();
+        $data_RSRState = $this->read_state();
+        $json_red = $this->map_json_red_airbase($data_RSRState);
+        $json_blue= $this->map_json_blue_airbase($data_RSRState);
 
         $this->assign('json_red', $json_red);
         $this->assign('json_blue', $json_blue);
@@ -115,7 +116,7 @@ class Index extends Controller
 
     }
 
-    public function blue_temp(){
+    public function blue_json_generator_airbase(){
         $blue_current_airbase = $this->read_state_blue_airbase();
 
 
