@@ -104,7 +104,12 @@ function format_date($time){
     );
     foreach ($f as $k=>$v)    {
         if (0 !=$c=floor($t/(int)$k)) {
-            return "$c $v ago";
+            if ($c > 1){
+                return "$c $v" . 's' . " ago";
+
+            }else{
+                return "$c $v ago";
+            }
         }
     }
 }
