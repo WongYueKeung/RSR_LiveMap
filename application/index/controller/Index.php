@@ -37,8 +37,11 @@ class Index extends Controller
             'list' => array('id' => 'content1', 'key2' => 'content2')
         ]);
         $data_RSRState = $this->read_state();
-        $json_red = $this->map_json_red_airbase($data_RSRState);
-        $json_blue= $this->map_json_blue_airbase($data_RSRState);
+
+        //Update db once from RSRState.json b4 showin the map
+        $this->update_state($data_RSRState);
+        $json_red = $this->red_json_generator_airbase($data_RSRState);
+        $json_blue= $this->blue_json_generator_airbase($data_RSRState);
 
         $this->assign('json_red', $json_red);
         $this->assign('json_blue', $json_blue);
@@ -116,8 +119,15 @@ class Index extends Controller
 
     }
 
-    public function blue_json_generator_airbase(){
-        $blue_current_airbase = $this->read_state_blue_airbase();
+    /**
+     * @param $blue_current_airbase an array contain Blue current airbases, has to be from RSRstate.json file
+     * @return String json string for the mapbox,  inside the js
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function blue_json_generator_airbase($blue_current_airbase){
+        //$blue_current_airbase = $this->read_state_blue_airbase();
 
 
         foreach ($blue_current_airbase as $key => $value){
@@ -143,42 +153,9 @@ class Index extends Controller
         //dump(json_encode($data));
 
 
-        return $data;
+        //return $data;
 
-    }
-
-    public function red_temp(){
-        $blue_current_airbase = $this->read_state_red_airbase();
-
-
-        foreach ($blue_current_airbase as $key => $value){
-
-            $db_temp = CaucasusLivemap::where('name', $value)->find();
-            //dump($value);
-            //dump($db_temp);
-            $data[$key]['type'] = 'Feature';
-            $data_properties['cap'] = $db_temp['display_name'];
-            $data_properties['uncap'] = 'small text';
-
-            $data[$key]['properties'] = $data_properties;
-
-            $data_geometry['type'] = "Point";
-            $data_coordinates = array($db_temp['x'],$db_temp['y']);
-            $data_geometry['coordinates'] = $data_coordinates;
-
-            $data[$key]['geometry'] = $data_geometry;
-
-
-            unset($data_properties, $data_geometry,$data_coordinates);
-        }
-        //dump(json_encode($data));
-
-
-        return $data;
-
-    }
-
-    public function map_json_blue_airbase(){
+        //start to merge this array in to json for mapbox web GL
         $json =  '{
             "id":"blue",
             "type":"symbol",
@@ -261,15 +238,51 @@ class Index extends Controller
 
         //make json data for key:features
         $json_decode = json_decode($json, 1);
-        $json_decode['source']['data']['features'] = $this->blue_temp();
+        $json_decode['source']['data']['features'] = $data;
 
 
         //temp fix json decode issue
         $result = str_replace('[]' , '{}',json_encode($json_decode));
         return $result;
+
     }
 
-    public function map_json_red_airbase(){
+    /**
+     * @param $red_current_airbase an array contain Blue current airbases, has to be from RSRstate.json file
+     * @return String json string for the mapbox,  inside the js
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function red_json_generator_airbase($red_current_airbase){
+        //$blue_current_airbase = $this->read_state_red_airbase();
+
+
+        foreach ($red_current_airbase as $key => $value){
+
+            $db_temp = CaucasusLivemap::where('name', $value)->find();
+            //dump($value);
+            //dump($db_temp);
+            $data[$key]['type'] = 'Feature';
+            $data_properties['cap'] = $db_temp['display_name'];
+            $data_properties['uncap'] = 'small text';
+
+            $data[$key]['properties'] = $data_properties;
+
+            $data_geometry['type'] = "Point";
+            $data_coordinates = array($db_temp['x'],$db_temp['y']);
+            $data_geometry['coordinates'] = $data_coordinates;
+
+            $data[$key]['geometry'] = $data_geometry;
+
+
+            unset($data_properties, $data_geometry,$data_coordinates);
+        }
+        //dump(json_encode($data));
+
+
+        //return $data;
+
         $json =  '{
             "id":"red",
             "type":"symbol",
@@ -357,8 +370,8 @@ class Index extends Controller
         $result = str_replace('[]' , '{}',json_encode($json_decode));
 
         return $result;
-    }
 
+    }
 
     public function map_json_blue_frap(){
         $this->update_state();
