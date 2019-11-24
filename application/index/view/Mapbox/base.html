@@ -167,58 +167,58 @@
             //map.scrollZoom.disable();
             //map.setMinZoom(7.0);
 
-            map.loadImage('http://rsr-map.com/airbase-neutral.png', function(error, image) {
+            map.loadImage('http://livemap.redstormrising.online:8888/airbase-neutral.png', function(error, image) {
                 if (error) throw error;
                 map.addImage('airbase-neutral', image);
                 map.addLayer({php} echo $json_neutral_airbase{/php});
-            });
-
-            //render blue farps
-            map.loadImage('http://rsr-map.com/farp-blue.png', function(error, image) {
-                if (error) throw error;
-                map.addImage('farp-blue', image);
-                map.addLayer({php} echo $json_blue_airbase{/php});
                 });
 
-            //render red farps
-            map.loadImage('http://rsr-map.com/farp-red.png', function(error, image) {
-                if (error) throw error;
-                map.addImage('farp-red', image);
-                map.addLayer({php} echo $json_red_farp{/php});
-                });
+                //render blue farps
+                map.loadImage('http://livemap.redstormrising.online:8888/farp-blue.png', function(error, image) {
+                    if (error) throw error;
+                    map.addImage('farp-blue', image);
+                    map.addLayer({php} echo $json_blue_farp{/php});
+                    });
 
-            //render neutral farps
-            map.loadImage('http://rsr-map.com/farp-yellow.png', function(error, image) {
-                if (error) throw error;
-                map.addImage('farp-neutral', image);
-                map.addLayer({php} echo $json_neutral_airbase{/php});
-                });
+                    //render red farps
+                    map.loadImage('http://livemap.redstormrising.online:8888/farp-red.png', function(error, image) {
+                        if (error) throw error;
+                        map.addImage('farp-red', image);
+                        map.addLayer({php} echo $json_red_farp{/php});
+                        });
 
-            map.loadImage('http://rsr-map.com/farp-blue.png', function(error, image) {
-                if (error) throw error;
-                map.addImage('farp-blue', image);
-                map.addLayer({
-                    "id": "points",
-                    "type": "symbol",
-                    "source": {
-                        "type": "geojson",
-                        "data": {
-                            "type": "FeatureCollection",
-                            "features": [{
-                                "type": "Feature",
-                                "geometry": {
-                                    "type": "Point",
-                                    "coordinates": [0, 0]
-                                }
-                            }]
-                        }
-                    },
-                    "layout": {
-                        "icon-image": "farp-blue",
-                        "icon-size": 0.15
-                    }
-                });
-            });
+                        //render neutral farps
+                        map.loadImage('http://livemap.redstormrising.online:8888/farp-yellow.png', function(error, image) {
+                            if (error) throw error;
+                            map.addImage('farp-neutral', image);
+                            map.addLayer({php} echo $json_neutral_farp{/php});
+                            });
+
+                            map.loadImage('http://livemap.redstormrising.online:8888/farp-blue.png', function(error, image) {
+                                if (error) throw error;
+                                map.addImage('farp-blue', image);
+                                map.addLayer({
+                                    "id": "points",
+                                    "type": "symbol",
+                                    "source": {
+                                        "type": "geojson",
+                                        "data": {
+                                            "type": "FeatureCollection",
+                                            "features": [{
+                                                "type": "Feature",
+                                                "geometry": {
+                                                    "type": "Point",
+                                                    "coordinates": [0, 0]
+                                                }
+                                            }]
+                                        }
+                                    },
+                                    "layout": {
+                                        "icon-image": "farp-blue",
+                                        "icon-size": 0.15
+                                    }
+                                });
+                            });
 
 </script>
 

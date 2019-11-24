@@ -71,13 +71,13 @@ class Farp extends Controller
             unset($data_properties, $data_geometry,$data_coordinates);
         }
         //dump(json_encode($data));
-
-        halt($data);
+        //halt($blue_current_farp);
+        //halt($data);
         //return $data;
 
         //start to merge this array in to json for mapbox web GL
         $json =  '{
-                    "id": "farp_blue",
+                    "id": "farp-blue",
                     "type": "symbol",
                     "source": {
                         "type": "geojson",
@@ -93,11 +93,11 @@ class Farp extends Controller
                         }
                     },
                     "layout": {
-                        "icon-image": "farp_blue",
+                        "icon-image": "farp-blue",
                         "icon-allow-overlap": true,
                         "icon-ignore-placement": true,
                         "text-allow-overlap": true,
-                        "icon-size": 0.04,
+                        "icon-size": 0.1,
                             "text-field":[
                               "format",
                               [
@@ -185,7 +185,7 @@ class Farp extends Controller
         //return $data;
 
         $json =  '{
-                    "id": "farp_red",
+                    "id": "farp-red",
                     "type": "symbol",
                     "source": {
                         "type": "geojson",
@@ -201,11 +201,11 @@ class Farp extends Controller
                         }
                     },
                     "layout": {
-                        "icon-image": "farp_red",
+                        "icon-image": "farp-red",
                         "icon-allow-overlap": true,
                         "icon-ignore-placement": true,
                         "text-allow-overlap": true,
-                        "icon-size": 0.04,
+                        "icon-size": 0.1,
                             "text-field":[
                               "format",
                               [
@@ -287,7 +287,7 @@ class Farp extends Controller
         //return $data;
 
         $json =  '{
-                    "id": "farp_neutral",
+                    "id": "farp-neutral",
                     "type": "symbol",
                     "source": {
                         "type": "geojson",
@@ -307,7 +307,7 @@ class Farp extends Controller
                         "icon-allow-overlap": true,
                         "icon-ignore-placement": true,
                         "text-allow-overlap": true,
-                        "icon-size": 0.04,
+                        "icon-size": 0.1,
                             "text-field":[
                               "format",
                               [

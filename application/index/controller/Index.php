@@ -66,10 +66,11 @@ class Index extends Controller
         //halt($json_neutral_airbase);
 
         //generate farps' json file
-        $json_red_farp = Farp::red_json_generator_farp($data_blue_farp);
-        $json_blue_farp= Farp::blue_json_generator_farp($data_red_farp);
+        $json_red_farp = Farp::red_json_generator_farp($data_red_farp);
+        $json_blue_farp= Farp::blue_json_generator_farp($data_blue_farp);
         $json_neutral_farp = Farp::neutral_json_generator_farp($data_neutral_farp);
-
+        //print($json_blue_farp);
+        //exit();
 
         //export to view template to render
         //export airbases' json to view template
