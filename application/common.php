@@ -88,13 +88,14 @@ function get_url_decode($url)
         }
     }
     return json_decode($result);
+
 }
 
 function format_date($time){
     $t=time()-$time;
     $f=array(
         '31536000'=>'Year',
-        '2592000'=>'Month',
+        '2592000'=>'Mont=h',
         '604800'=>'Week',
         '86400'=>'Day',
         '3600'=>'Hr',
@@ -103,7 +104,12 @@ function format_date($time){
     );
     foreach ($f as $k=>$v)    {
         if (0 !=$c=floor($t/(int)$k)) {
-            return "$c $v ago";
+            if ($c > 1){
+                return "$c $v" . 's' . " ago";
+
+            }else{
+                return "$c $v ago";
+            }
         }
     }
 }
