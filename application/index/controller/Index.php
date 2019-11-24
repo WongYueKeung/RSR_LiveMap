@@ -44,16 +44,22 @@ class Index extends Controller
         //read the RSRState.json file content and spilt them, covert into PHP array(reuse the RSRState.json content from updating DB)
         $data_blue_airbase = Airbase::read_state_blue_airbase($data_RSRState);
         $data_red_airbase = Airbase::read_state_red_airbase($data_RSRState);
+        $data_neutral_airbase = Airbase::read_state_neutral_airbase($data_RSRState);
+
+        //halt($data_neutral_airbase);
+
 
         $json_red_airbase = Airbase::red_json_generator_airbase($data_red_airbase);
         $json_blue_airbase= Airbase::blue_json_generator_airbase($data_blue_airbase);
+        $json_neutral_airbase= Airbase::neutral_json_generator_airbase($data_neutral_airbase);
 
 
         //dump($json_red);
-        //halt($json_blue);
+        //halt($json_neutral_airbase);
 
-        $this->assign('json_red', $json_red_airbase);
-        $this->assign('json_blue', $json_blue_airbase);
+        $this->assign('json_red_airbase', $json_red_airbase);
+        $this->assign('json_blue_airbase', $json_blue_airbase);
+        $this->assign('json_neutral_airbase', $json_neutral_airbase);
 
 
         return $this->fetch('');
