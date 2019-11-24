@@ -41,25 +41,46 @@ class Index extends Controller
 
         //Update db once from RSRState.json b4 showin the map
         $this->update_state($data_RSRState);
-        //read the RSRState.json file content and spilt them, covert into PHP array(reuse the RSRState.json content from updating DB)
+    //read the RSRState.json file content and spilt them, covert into PHP array(reuse the RSRState.json content from updating DB)
+        //read all airbasese from RSRState.json
         $data_blue_airbase = Airbase::read_state_blue_airbase($data_RSRState);
         $data_red_airbase = Airbase::read_state_red_airbase($data_RSRState);
         $data_neutral_airbase = Airbase::read_state_neutral_airbase($data_RSRState);
-
         //halt($data_neutral_airbase);
 
 
+        //read all farps from RSRState.json
+        $data_blue_farp = Farp::read_state_blue_farp($data_RSRState);
+        $data_red_farp = Farp::read_state_red_farp($data_RSRState);
+        $data_neutral_farp = Farp::read_state_neutral_farp($data_RSRState);
+        //halt($data_blue_farp);
+
+        //Generate the json that needed for mapbox
+        //generate airbase json file
         $json_red_airbase = Airbase::red_json_generator_airbase($data_red_airbase);
-        $json_blue_airbase= Airbase::blue_json_generator_airbase($data_blue_airbase);
-        $json_neutral_airbase= Airbase::neutral_json_generator_airbase($data_neutral_airbase);
+        $json_blue_airbase = Airbase::blue_json_generator_airbase($data_blue_airbase);
+        $json_neutral_airbase = Airbase::neutral_json_generator_airbase($data_neutral_airbase);
 
 
         //dump($json_red);
         //halt($json_neutral_airbase);
 
+        //generate farps' json file
+        $json_red_farp = Farp::red_json_generator_farp($data_blue_farp);
+        $json_blue_farp= Farp::blue_json_generator_farp($data_red_farp);
+        $json_neutral_farp = Farp::neutral_json_generator_farp($data_neutral_farp);
+
+
+        //export to view template to render
+        //export airbases' json to view template
         $this->assign('json_red_airbase', $json_red_airbase);
         $this->assign('json_blue_airbase', $json_blue_airbase);
         $this->assign('json_neutral_airbase', $json_neutral_airbase);
+
+        //export farps' json to view template
+        $this->assign('json_red_farp', $json_red_farp);
+        $this->assign('json_blue_farp', $json_blue_farp);
+        $this->assign('json_neutral_farp', $json_neutral_farp);
 
 
         return $this->fetch('');

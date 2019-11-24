@@ -173,6 +173,27 @@
                 map.addLayer({php} echo $json_neutral_airbase{/php});
             });
 
+            //render blue farps
+            map.loadImage('http://rsr-map.com/farp-blue.png', function(error, image) {
+                if (error) throw error;
+                map.addImage('farp-blue', image);
+                map.addLayer({php} echo $json_blue_airbase{/php});
+                });
+
+            //render red farps
+            map.loadImage('http://rsr-map.com/farp-red.png', function(error, image) {
+                if (error) throw error;
+                map.addImage('farp-red', image);
+                map.addLayer({php} echo $json_red_farp{/php});
+                });
+
+            //render neutral farps
+            map.loadImage('http://rsr-map.com/farp-yellow.png', function(error, image) {
+                if (error) throw error;
+                map.addImage('farp-neutral', image);
+                map.addLayer({php} echo $json_neutral_airbase{/php});
+                });
+
             map.loadImage('http://rsr-map.com/farp-blue.png', function(error, image) {
                 if (error) throw error;
                 map.addImage('farp-blue', image);
